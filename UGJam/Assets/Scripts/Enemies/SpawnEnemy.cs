@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class SpawnEnemy : MonoBehaviour
 {
+    public static SpawnEnemy current;
+
+
     [SerializeField] private GameObject[] enemies;
-    [SerializeField] private Transform[] spawners;
+    [SerializeField] public Transform[] spawners;
     [SerializeField] private GameObject summoningEffect;
 
 
@@ -16,6 +19,11 @@ public class SpawnEnemy : MonoBehaviour
 
     GameObject newSummoningEffect;
 
+
+    private void Awake()
+    {
+        current = this;   
+    }
 
     void Start()
     {
@@ -36,7 +44,8 @@ public class SpawnEnemy : MonoBehaviour
     private void SpawnRandomEnemy(int index)
     {
         newSummoningEffect = Instantiate(summoningEffect, spawners[index].position, Quaternion.identity);
-        elapsedTime = 4;
+        //elapsedTime = RandomTimeBetweenSpawns();
+        elapsedTime = 4f;
         StartCoroutine(TimeToInstantiate(index));
     }
 
@@ -48,8 +57,8 @@ public class SpawnEnemy : MonoBehaviour
         elapsedTime = RandomTimeBetweenSpawns();
     }
 
-    private int RandomTimeBetweenSpawns()
+    private float RandomTimeBetweenSpawns()
     {
-        return Random.Range(3, 4);
+        return Random.Range(0f, 4f);
     }
 }

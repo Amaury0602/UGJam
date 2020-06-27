@@ -10,6 +10,7 @@ public class Exploder : MonoBehaviour, IShootable
     [SerializeField] float offset = 90f;
     MultiplyChecker multiplyChecker;
     Quaternion projectileRotation;
+    [SerializeField]GameObject blood;
     // Start is called before the first frame update
     public bool Interactable { get; set; }
 
@@ -46,6 +47,7 @@ public class Exploder : MonoBehaviour, IShootable
         multiplyChecker.exploders.Clear();
         foreach (var enemy in FindObjectsOfType<Exploder>())
         {
+            Instantiate(blood, enemy.transform.position,enemy.transform.rotation);
             enemy.Shoot();
             Destroy(enemy.gameObject);
         }

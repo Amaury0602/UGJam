@@ -15,11 +15,13 @@ public class Player : MonoBehaviour
     [SerializeField] float rapidFireBuff = 0.4f;
     [SerializeField] GameObject coinPE;
     [SerializeField] GameObject powerupPE;
+    [SerializeField] ParticleSystem dust;
     bool isItActivated;
     float speed;
     float rapidFireBuffTimer;
     float movementBuffTimer;
     Rigidbody2D rb;
+    Animator anim;
 
     private void Awake()
     {
@@ -28,6 +30,7 @@ public class Player : MonoBehaviour
 
     void Start()
     {
+        anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         speed = Startingspeed;
     }
@@ -45,6 +48,8 @@ public class Player : MonoBehaviour
             isItActivated = false;
         }
         movementBuffTimer -= Time.deltaTime;
+
+        ControlAnimations();
     }
 
     private void FixedUpdate()
@@ -56,11 +61,51 @@ public class Player : MonoBehaviour
     {
         float xMovement = Input.GetAxisRaw("Horizontal") * speed * Time.deltaTime;
         float yMovement = Input.GetAxisRaw("Vertical") * speed * Time.deltaTime;
-        if(Input.GetAxisRaw("Horizontal") >= 0)
-        {
-            
-        }
         rb.velocity = new Vector2(xMovement, yMovement);
+        if(Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
+        {
+            dust.Play();
+        }
+        
+    }
+
+    private void ControlAnimations()
+    {
+        anim.SetFloat("directionX", rb.velocity.x);
+        anim.SetFloat("directionY", rb.velocity.y);
+
+        if (rb.velocity.y == 0 && rb.velocity.x == 0) anim.SetTrigger("idle");
+        //if (rb.velocity.x < 0)
+        //{
+        //    anim.SetBool("goLeft", true);
+        //} else
+        //{
+        //    anim.SetBool("goLeft", false);
+        //}
+
+        //if (rb.velocity.x > 0)
+        //{
+        //    anim.SetBool("goRight", true);
+        //} else
+        //{
+        //    anim.SetBool("goRight", false);
+        //}
+
+        //if (rb.velocity.y < 0)
+        //{
+        //    anim.SetBool("goDown", true);
+        //} else
+        //{
+        //    anim.SetBool("goDown", false);
+        //}
+
+        //if (rb.velocity.y > 0)
+        //{
+        //    anim.SetBool("goUp", true);
+        //} else
+        //{
+        //    anim.SetBool("goUp", false);
+        //}
     }
 
     void OnTriggerEnter2D(Collider2D other)

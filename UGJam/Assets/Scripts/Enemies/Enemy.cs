@@ -5,6 +5,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour, IShootable
 {
     MultiplyChecker multiplyChecker;
+    [SerializeField]GameObject blood;
     // Start is called before the first frame update
     public bool Interactable { get; set; }
 
@@ -39,6 +40,7 @@ public class Enemy : MonoBehaviour, IShootable
         multiplyChecker.enemies.Clear();
         foreach (var enemy in FindObjectsOfType<Enemy>())
         {
+            Instantiate(blood, enemy.transform.position,enemy.transform.rotation);
             Destroy(enemy.gameObject);
         }
         multiplyChecker.TestEnemies();

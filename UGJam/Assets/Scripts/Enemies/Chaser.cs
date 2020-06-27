@@ -5,6 +5,7 @@ using UnityEngine;
 public class Chaser : MonoBehaviour, IShootable
 {
     MultiplyChecker multiplyChecker;
+    [SerializeField]GameObject blood;
     // Start is called before the first frame update
     public bool Interactable { get; set; }
 
@@ -41,6 +42,7 @@ public class Chaser : MonoBehaviour, IShootable
         multiplyChecker.chasers.Clear();
         foreach (var enemy in FindObjectsOfType<Chaser>())
         {
+            Instantiate(blood, enemy.transform.position,enemy.transform.rotation);
             Destroy(enemy.gameObject);
         }
         multiplyChecker.TestChasers();

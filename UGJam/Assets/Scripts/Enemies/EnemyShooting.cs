@@ -11,6 +11,7 @@ public class EnemyShooting : MonoBehaviour
     [SerializeField] Transform gunPoint;
     [SerializeField] float projectilesAngleDiff = 45f;
     [SerializeField] float offset = 90f;
+    Animator anim;
     float rotZ;
 
     float shootCooldown;
@@ -18,6 +19,7 @@ public class EnemyShooting : MonoBehaviour
 
     private void Start() 
     {
+        anim = GetComponent<Animator>();
         shootCooldown = timeBetweenShots;    
     }
 
@@ -38,6 +40,7 @@ public class EnemyShooting : MonoBehaviour
 
     private void Shoot()
     {
+        anim.SetTrigger("attack");
         for (int i = 0; i < numberOfShots ; i++)
         {
             projectileRotation = Quaternion.Euler(0,0,(i * projectilesAngleDiff + rotZ)); 

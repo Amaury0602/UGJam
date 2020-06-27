@@ -28,26 +28,26 @@ public class PlayerShooting : MonoBehaviour
             if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.UpArrow))
             {
                 ShootVerticalInput();
-                if(Input.GetKey(KeyCode.DownArrow))
-                {
-                    GetComponent<Animator>().SetTrigger("Down");
-                }
-                else if(Input.GetKey(KeyCode.UpArrow))
-                {
-                    GetComponent<Animator>().SetTrigger("Up");
-                }
+                //if(Input.GetKey(KeyCode.DownArrow))
+                //{
+                //    GetComponent<Animator>().SetTrigger("Down");
+                //}
+                //else if(Input.GetKey(KeyCode.UpArrow))
+                //{
+                //    GetComponent<Animator>().SetTrigger("Up");
+                //}
             }
             else if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow))
             {
                 ShootHorizontalInput();
-                if(Input.GetKey(KeyCode.RightArrow))
-                {
-                    GetComponent<Animator>().SetTrigger("Right");
-                }
-                else if(Input.GetKey(KeyCode.LeftArrow))
-                {
-                    GetComponent<Animator>().SetTrigger("Left");
-                }
+                //if(Input.GetKey(KeyCode.RightArrow))
+                //{
+                //    GetComponent<Animator>().SetTrigger("Right");
+                //}
+                //else if(Input.GetKey(KeyCode.LeftArrow))
+                //{
+                //    GetComponent<Animator>().SetTrigger("Left");
+                //}
             }
         }
     }

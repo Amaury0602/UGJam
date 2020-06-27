@@ -5,6 +5,7 @@ using UnityEngine;
 public class Shooter : MonoBehaviour, IShootable
 {
     MultiplyChecker multiplyChecker;
+    [SerializeField]GameObject blood;
     // Start is called before the first frame update
     public bool Interactable { get; set; }
 
@@ -40,6 +41,7 @@ public class Shooter : MonoBehaviour, IShootable
         multiplyChecker.shooters.Clear();
         foreach (var enemy in FindObjectsOfType<Shooter>())
         {
+            Instantiate(blood, enemy.transform.position,enemy.transform.rotation);
             Destroy(enemy.gameObject);
         }
         multiplyChecker.TestShooters();

@@ -29,20 +29,20 @@ public class ScoreText : MonoBehaviour
         if (!positivePoints)
         {
             anim.SetTrigger("scoreDown");
-            Score -= 10;
+            Score -= 3;
         } 
         if (positivePoints)
         {
             anim.SetTrigger("scoreUp");
             if (objectsInteracted <= 2)
             {
-                Score++;
+                Score += 4;
             } else if (objectsInteracted >= 4)
             {
-                Score += 2 * objectsInteracted;
+                Score += 4 * objectsInteracted;
             } else if (objectsInteracted >= 8)
             {
-                Score += 3 * objectsInteracted;
+                Score += 8 * objectsInteracted;
             }
             Score += objectsInteracted;
         }

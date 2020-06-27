@@ -4,13 +4,17 @@ using UnityEngine;
 
 public class HuntPlayer : MonoBehaviour
 {
-    [SerializeField] private float moveSpeed;
+    [SerializeField] private float normalSpeed;
+    [SerializeField] float chasingSpeed;
+    [SerializeField] float chasingDistance;
+    float moveSpeed;
     private Rigidbody2D rb;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        moveSpeed = normalSpeed;
     }
 
     // Update is called once per frame
@@ -23,6 +27,27 @@ public class HuntPlayer : MonoBehaviour
     {
         Transform player = Player.instance.transform;
         Vector2 direction = (player.position - transform.position).normalized;
-        rb.velocity = direction * moveSpeed * Time.deltaTime;
+        transform.position = Vector3.MoveTowards(transform.position,player.transform.position, moveSpeed * Time.deltaTime);
+    }
+
+
+    private void Update()
+    {
+        if(tag == "Chasing Enemy" && Player.instance)
+        {
+            ChasePlayer();
+        }    
+    }
+
+    void ChasePlayer()
+    {
+        if (Vector3.Distance(Player.instance.transform.position, transform.position) <= chasingDistance)
+        {
+            moveSpeed = chasingSpeed;
+        }
+        else
+        {
+            moveSpeed = normalSpeed;
+        }
     }
 }

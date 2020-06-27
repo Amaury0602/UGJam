@@ -4,41 +4,19 @@ using UnityEngine;
 
 public class MultiplyChecker : MonoBehaviour
 {
-    [SerializeField] GameObject enemy;
-
     public static MultiplyChecker current;
     
     
     //list of every interactable objects
     public List<Enemy> enemies = new List<Enemy>();
+    public List<Exploder> exploders = new List<Exploder>();
+    public List<Chaser> chasers = new List<Chaser>();
+    public List<Shooter> shooters = new List<Shooter>();
 
     private void Awake()
     {
         current = this;
     }
-
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-        if (Input.GetKeyDown(KeyCode.L)) SpawnEnemy();
-
-      
-    }
-
-    void SpawnEnemy() // for test purposes
-    {
-        Vector2 newPos = new Vector2(Random.Range(-3, 3), Random.Range(-3, 3));
-        Instantiate(enemy, newPos, Quaternion.identity);
-    }
-
 
     public void TestEnemies()
     {
@@ -48,4 +26,32 @@ public class MultiplyChecker : MonoBehaviour
             enemy.Interactable = isDivisibleByTwo;
         }
     }
+
+    public void TestExploders()
+    {
+        bool isDivisibleByTwo = exploders.Count % 2 == 0 ? true : false;
+        foreach (var enemy in exploders)
+        {
+            enemy.Interactable = isDivisibleByTwo;
+        }
+    }
+
+    public void TestChasers()
+    {
+        bool isDivisibleByTwo = chasers.Count % 2 == 0 ? true : false;
+        foreach (var enemy in chasers)
+        {
+            enemy.Interactable = isDivisibleByTwo;
+        }
+    }
+
+    public void TestShooters()
+    {
+        bool isDivisibleByTwo = shooters.Count % 2 == 0 ? true : false;
+        foreach (var enemy in shooters)
+        {
+            enemy.Interactable = isDivisibleByTwo;
+        }
+    }
+   
 }

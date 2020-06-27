@@ -8,6 +8,8 @@ TagManager:
   - Movement
   - playerBullet
   - Rapid Fire
+  - Chasing Enemy
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -19,8 +21,8 @@ TagManager:
   - 
   - Player
   - PlayerBullet
-  - 
-  - 
+  - Enemy
+  - EnemyProjectile
   - 
   - 
   - 
@@ -44,4 +46,10 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: background
+    uniqueID: 4073454971
+    locked: 0
+  - name: foreground
+    uniqueID: 2960562079
     locked: 0

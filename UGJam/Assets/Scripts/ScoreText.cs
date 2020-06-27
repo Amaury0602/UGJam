@@ -5,27 +5,48 @@ using UnityEngine.UI;
 
 public class ScoreText : MonoBehaviour
 {
-    [SerializeField] float timeBetweenPoints = 0.4f;
-    public static int currentScore = 0;
-    float timer;
-    void Start()
+    public static ScoreText current;
+
+    public int Score { get; set; }
+    private Animator anim;
+    private Text UIText;
+
+    private void Awake()
     {
-        timer = 0;
+        current = this;
     }
 
-    // Update is called once per frame
-    void Update()
+    void Start()
     {
-        if(timer <= 0)
-        {
-            currentScore++;
-            timer = timeBetweenPoints;
-        }
-        GetComponent<Text>().text = currentScore.ToString();
-        timer -= Time.deltaTime;
+        anim = GetComponent<Animator>();
+        UIText = GetComponent<Text>();
     }
-    public void AddScore(int addingAmount)
+    
+
+
+    public void ChangeScore(bool positivePoints, int objectsInteracted)
     {
-        currentScore += addingAmount;
+        if (!positivePoints)
+        {
+            anim.SetTrigger("scoreDown");
+            Score -= 10;
+        } 
+        if (positivePoints)
+        {
+            anim.SetTrigger("scoreUp");
+            if (objectsInteracted <= 2)
+            {
+                Score++;
+            } else if (objectsInteracted >= 4)
+            {
+                Score += 2 * objectsInteracted;
+            } else if (objectsInteracted >= 8)
+            {
+                Score += 3 * objectsInteracted;
+            }
+            Score += objectsInteracted;
+        }
+        
+        UIText.text = Score.ToString();
     } 
 }
